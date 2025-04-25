@@ -14,10 +14,8 @@ dependencies {
 //// Any published source jar should contain apt-generated sources
 //sourceSets.configureEach { sourceSet ->
 //    if (tasks.names.contains(sourceSet.getSourcesJarTaskName())) {
-//        def compile = tasks.named(sourceSet.getCompileTaskName('java'))
 //        tasks.named(sourceSet.getSourcesJarTaskName(), Jar) {
-//            dependsOn(compile)
-//            from compile.map { it.options.generatedSourceOutputDirectory }
+//            from sourceSet.output.generatedSourcesDirs
 //        }
 //    }
 //}
