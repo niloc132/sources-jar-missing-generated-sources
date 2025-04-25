@@ -3,21 +3,21 @@ plugins {
 }
 
 // Enable source jars, as you would for publication.
-java {
-    withSourcesJar()
-}
+java.withSourcesJar()
 
 dependencies {
     // Sample annotation processor, any one will result in this issue
     implementation "com.google.dagger:dagger:2.56.2"
     annotationProcessor "com.google.dagger:dagger-compiler:2.56.2"
-
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java', (tasks.getByName(JavaPlugin.COMPILE_JAVA_TASK_NAME) as JavaCompile).options.generatedSourceOutputDirectory]
-        }
-    }
-}
+//// Any published source jar should contain apt-generated sources
+//sourceSets.configureEach { sourceSet ->
+//    if (tasks.names.contains(sourceSet.getSourcesJarTaskName())) {
+//        def compile = tasks.named(sourceSet.getCompileTaskName('java'))
+//        tasks.named(sourceSet.getSourcesJarTaskName(), Jar) {
+//            dependsOn(compile)
+//            from compile.map { it.options.generatedSourceOutputDirectory }
+//        }
+//    }
+//}
